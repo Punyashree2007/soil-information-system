@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DIGI DHARTI - Soil Info Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #00695c;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      text-align: center;
+      color: #00796b;
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"], button {
+      padding: 12px;
+      width: 100%;
+      margin: 5px 0;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #00796b;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    #resultBox {
+      margin-top: 30px;
+      background-color: #e0f2f1;
+      padding: 20px;
+      border-left: 6px solid #00796b;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+
+    img.soil-image {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: #444;
+      margin-top: 30px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>DIGI DHARTI 🌱</h1>
+    <h3>“Know Your Soil, Grow Your Future”</h3>
+
+    <input type="text" id="soilInput" placeholder="Enter soil type like black, red, etc">
+    <button onclick="searchSoil()">Search</button>
+
+    <div id="resultBox"></div>
+  </div>
+
+  <footer>
+    Made with ❤️ by TEAM DIGI DHARTHI for you — All in one place
+  </footer>
+
+  <script>
+    function searchSoil() {
+      const soilData = {
+        black: {
+          nutrients: "Calcium carbonate, Magnesium",
+          pH: "6.0 - 8.0",
+          crops: "Cotton, Soybean, Millets",
+          image: "https://cdn.britannica.com/46/94446-050-5D712381/Black-soil-India.jpg"
+        },
+        red: {
+          nutrients: "Iron, Potash",
+          pH: "5.5 - 7.0",
+          crops: "Groundnut, Pulses, Oilseeds",
+          image: "https://cdn.britannica.com/85/94485-050-2B6D49E6/Red-soil-India.jpg"
+        },
+        laterite: {
+          nutrients: "Low fertility, needs manure",
+          pH: "5.0 - 6.5",
+          crops: "Tea, Coffee, Cashew",
+          image: "https://cdn.britannica.com/85/94585-050-2CF6E7FE/Laterite-soil.jpg"
+        },
+        alluvial: {
+          nutrients: "Nitrogen, Potassium",
+          pH: "6.5 - 7.5",
+          crops: "Wheat, Rice, Sugarcane",
+          image: "https://cdn.britannica.com/85/94485-050-4B179AE7/Alluvial-soil.jpg"
+        }
+      };
+
+      const input = document.getElementById("soilInput").value.toLowerCase().trim();
+      const result = soilData[input];
+      const box = document.getElementById("resultBox");
+
+      if (result) {
+        box.innerHTML = `
+          <strong>🌍 Soil Type:</strong> ${input}<br><br>
+          <strong>🌿 Nutrients:</strong> ${result.nutrients}<br>
+          <strong>⚖️ pH Level:</strong> ${result.pH}<br>
+          <strong>🌾 Best Crops:</strong> ${result.crops}<br>
+          <img src="${result.image}" alt="${input} soil image" class="soil-image">
+        `;
+      } else {
+        box.innerHTML = `<p class="error">❌ Soil type not found. Try: black, red, laterite, or alluvial.</p>`;
+      }
+    }
+  </script>
+
+</body>
+</html>
+
